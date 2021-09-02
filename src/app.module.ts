@@ -7,9 +7,10 @@ import { FichaModule } from './endpoint/ficha/ficha.module';
 import { CompaniaModule } from './endpoint/compania/compania.module';
 import { PesajeModule } from './endpoint/pesaje/pesaje.module';
 import { TicketModule } from './endpoint/ticket/ticket.module';
+import { UsuarioModule } from './endpoint/usuario/usuario.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), FichaModule, CompaniaModule, PesajeModule, TicketModule],
+  imports: [TypeOrmModule.forRoot(), FichaModule, CompaniaModule, PesajeModule, TicketModule, UsuarioModule],
   controllers: [AppController],
   providers: [AppService],
 })
