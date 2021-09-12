@@ -1,4 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { FichaEntity } from "./ficha.entity";
+import { TicketEntity } from "./ticket.entity";
+import { UsuarioEntity } from "./usuario.entity";
 
 @Entity('pesaje')
 export class PesajeEntity {
@@ -6,9 +9,31 @@ export class PesajeEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column()
-    ficha: string;
+    @ManyToOne(() => FichaEntity)
+    @JoinColumn({ name: "ficha_id" })
+    ficha: FichaEntity;
 
     @Column()
-    ticket: number;
+    ficha_id: string;
+
+    @OneToOne(() => TicketEntity, ticket => ticket.pesaje)
+    @JoinColumn({ name: "ticket_id" })
+    ticket: TicketEntity;
+
+    @Column()
+    ticket_id: string;
+
+    @Column()
+    peso_bruto: number;
+
+    @Column()
+    tonelaje: number;
+
+    @ManyToOne(() => UsuarioEntity, { eager: true })
+    @JoinColumn({ name: "usuario_id" })
+    usuario: UsuarioEntity;
+
+    @Column()
+    usuario_id: string;
+
 }

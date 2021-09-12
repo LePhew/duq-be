@@ -10,8 +10,5 @@ export class CompaniaEntity {
     nombre: string;
 
     @Column()
-    municipio: string;
-
-    @Column()
     distrito: string;
 }
