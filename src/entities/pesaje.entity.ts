@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { FichaEntity } from "./ficha.entity";
 import { TicketEntity } from "./ticket.entity";
 import { UsuarioEntity } from "./usuario.entity";
@@ -20,8 +20,8 @@ export class PesajeEntity {
     @JoinColumn({ name: "ticket_id" })
     ticket: TicketEntity;
 
-    @Column()
-    ticket_id: string;
+    @Column({ nullable: true })
+    ticket_id?: string;
 
     @Column()
     peso_bruto: number;

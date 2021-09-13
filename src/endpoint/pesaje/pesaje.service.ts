@@ -1,12 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PesajeEntity } from 'src/entities/pesaje.entity';
+import { TicketEntity } from 'src/entities/ticket.entity';
+import { Pesaje } from 'src/interfaces/pesaje';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class PesajeService {
 
-    constructor(@InjectRepository(PesajeEntity) private _pesajeRepository: Repository<PesajeEntity>) { }
+    constructor(
+        @InjectRepository(PesajeEntity) private _pesajeRepository: Repository<PesajeEntity>,
+        @InjectRepository(TicketEntity) private _ticketRepository: Repository<TicketEntity>) { }
 
     async getAll() {
         return await this._pesajeRepository.find();
@@ -16,9 +20,27 @@ export class PesajeService {
         return await this._pesajeRepository.findOne(id);
     }
 
-    async create(data: any) {
-        let pesaje = this._pesajeRepository.create(data);
-        await this._pesajeRepository.save(pesaje);
+    async create(data: Pesaje) {
+        let ticket = this._ticketRepository.create();
+        let created = await this._ticketRepository.save(ticket);
+
+        ticket = await this._ticketRepository.findOne(created.id);
+
+        let pesaje = this._pesajeRepository.create();
+
+        pesaje.ficha_id = data.ficha_id;
+        pesaje.usuario_id = data.usuario_id;
+        pesaje.tonelaje = data.tonelaje;
+        pesaje.peso_bruto = data.peso_bruto;
+        let createdPesaje = await this._pesajeRepository.save(pesaje);
+
+        pesaje = await this._pesajeRepository.findOne(createdPesaje.id);
+
+        pesaje.ticket_id = ticket.id;
+        ticket.pesaje_id = pesaje.id;
+
+        await this._pesajeRepository.update(pesaje.id, pesaje);
+        await this._ticketRepository.update(ticket.id, ticket);
         return pesaje;
     }
 

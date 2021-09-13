@@ -7,6 +7,7 @@ import { TicketEntity } from 'src/entities/ticket.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([TicketEntity])],
   providers: [TicketService],
-  controllers: [TicketController]
+  controllers: [TicketController],
+  exports: [TicketService]
 })
 export class TicketModule { }

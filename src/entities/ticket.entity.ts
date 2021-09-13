@@ -17,7 +17,7 @@ export class TicketEntity {
     @JoinColumn({ name: "pesaje_id" })
     pesaje: PesajeEntity;
 
-    @Column()
-    pesaje_id: string;
+    @Column({ nullable: true })
+    pesaje_id?: string;
 
 }
