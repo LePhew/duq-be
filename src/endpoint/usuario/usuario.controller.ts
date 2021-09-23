@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Body, Param, HttpException, HttpStatus } from '@nestjs/common';
 import { Usuario } from 'src/interfaces/usuario';
 import { UsuarioService } from './usuario.service';
 
@@ -18,6 +18,17 @@ export class UsuarioController {
     @Get(':id')
     getOne(@Param('id') id: string) {
         return this._usuarioService.getOne(id);
+    }
+
+    @Get('byname/:usuario')
+    async getByName(@Param('usuario') usuario: string) {
+        let u = await this._usuarioService.getByName(usuario);
+        if (u != null) {
+            return u;
+        }
+        else {
+            throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+        }
     }
 
     @Post()

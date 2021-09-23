@@ -12,6 +12,10 @@ export class UsuarioService {
         return await this._usuarioRepository.find();
     }
 
+    async getByName(usuario: string) {
+        return await this._usuarioRepository.findOne({ where: { usuario } })
+    }
+
     async getOne(id: string) {
         return await this._usuarioRepository.findOne(id);
     }
