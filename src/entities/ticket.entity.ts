@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, Generated, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PesajeEntity } from "./pesaje.entity";
 
 @Entity('ticket')
@@ -7,7 +7,7 @@ export class TicketEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Generated('increment')
+    @Column()
     numero: number;
 
     @CreateDateColumn()
@@ -19,5 +19,4 @@ export class TicketEntity {
 
     @Column({ nullable: true })
     pesaje_id?: string;
-
 }

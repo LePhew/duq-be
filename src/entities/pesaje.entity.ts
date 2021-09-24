@@ -9,14 +9,14 @@ export class PesajeEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ManyToOne(() => FichaEntity)
+    @ManyToOne(() => FichaEntity, {eager: true})
     @JoinColumn({ name: "ficha_id" })
     ficha: FichaEntity;
 
     @Column()
     ficha_id: string;
 
-    @OneToOne(() => TicketEntity, ticket => ticket.pesaje)
+    @OneToOne(() => TicketEntity, ticket => ticket.pesaje, {eager: true})
     @JoinColumn({ name: "ticket_id" })
     ticket: TicketEntity;
 
