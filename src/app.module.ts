@@ -12,7 +12,7 @@ import { UsuarioModule } from './endpoint/usuario/usuario.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     "type": "mysql",
-    "host": "35.227.117.131",
+    "host": "mysqldb",
     "port": 3306,
     "username": "root",
     "password": "urn0td3c3nt",
