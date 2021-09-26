@@ -12,10 +12,7 @@ import { UsuarioModule } from './endpoint/usuario/usuario.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     "type": "mysql",
-    "host": "/cloudsql/spartan-thunder-324617:us-east1:duq-fe",
-    "extra": {
-      "socketPath": "/cloudsql/spartan-thunder-324617:us-east1:duq-fe"
-    },
+    "host": "35.227.117.131",
     "port": 3306,
     "username": "root",
     "password": "urn0td3c3nt",
