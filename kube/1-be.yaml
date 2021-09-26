@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: duqbe
+  labels:
+    app: duqbe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: duqbe
+  template:
+    metadata:
+      labels:
+        app: duqbe
+    spec:
+      containers:
+        - name: duqbe
+          image: lephew/duqbe:latest
+          ports:
+            - containerPort: 3000

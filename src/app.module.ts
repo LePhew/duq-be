@@ -10,7 +10,22 @@ import { TicketModule } from './endpoint/ticket/ticket.module';
 import { UsuarioModule } from './endpoint/usuario/usuario.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(), FichaModule, CompaniaModule, PesajeModule, TicketModule, UsuarioModule],
+  imports: [TypeOrmModule.forRoot({
+    "type": "mysql",
+    "host": "/cloudsql/spartan-thunder-324617:us-east1:duq-fe",
+    "extra": {
+      "socketPath": "/cloudsql/spartan-thunder-324617:us-east1:duq-fe"
+    },
+    "port": 3306,
+    "username": "root",
+    "password": "urn0td3c3nt",
+    "database": "duqdb",
+    "synchronize": true,
+    "logging": true,
+    "entities": [
+      "dist/entities/*.entity.js"
+    ]
+  }), FichaModule, CompaniaModule, PesajeModule, TicketModule, UsuarioModule],
   controllers: [AppController],
   providers: [AppService],
 })
