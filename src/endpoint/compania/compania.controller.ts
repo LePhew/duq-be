@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { Compania } from 'src/interfaces/compania';
+import { Compania } from '../../interfaces/compania';
 import { CompaniaService } from './compania.service';
 
 @Controller('compania')

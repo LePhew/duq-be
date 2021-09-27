@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { Ficha, IFicha } from 'src/interfaces/ficha';
+import { Ficha, IFicha } from '../../interfaces/ficha';
 import { FichaService } from './ficha.service';
 
 @Controller('ficha')

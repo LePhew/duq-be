@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Put, Body, Param, HttpException, HttpStatus } from '@nestjs/common';
-import { Usuario } from 'src/interfaces/usuario';
+import { Usuario } from '../../interfaces/usuario';
 import { UsuarioService } from './usuario.service';
 
 @Controller('usuario')

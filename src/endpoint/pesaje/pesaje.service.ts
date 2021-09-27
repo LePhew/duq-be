@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { PesajeEntity } from 'src/entities/pesaje.entity';
-import { TicketEntity } from 'src/entities/ticket.entity';
-import { Pesaje } from 'src/interfaces/pesaje';
+import { PesajeEntity } from '../../entities/pesaje.entity';
+import { TicketEntity } from '../../entities/ticket.entity';
+import { Pesaje } from '../../interfaces/pesaje';
 import { Repository } from 'typeorm';
 
 @Injectable()
