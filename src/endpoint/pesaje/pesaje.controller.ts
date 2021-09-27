@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
-import { Pesaje } from 'src/interfaces/pesaje';
+import { Pesaje } from '../../interfaces/pesaje';
 import { PesajeService } from './pesaje.service';
 
 @Controller('pesaje')
