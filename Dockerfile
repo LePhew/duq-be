@@ -27,4 +27,4 @@ COPY --from=build /usr/src/app/dist ./
 COPY --from=build /usr/src/app/node_modules/ ./node_modules
 
 # Run the web service on container startup.
-CMD [ "node", "dist/main.js" ]
+CMD [ "node", "main.js" ]
