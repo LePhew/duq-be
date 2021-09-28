@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: duqbe
-          image: lephew/duqbe:latest
+          image: lephew/duqbe:v1
           ports:
             - containerPort: 3000

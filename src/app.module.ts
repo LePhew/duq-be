@@ -12,15 +12,15 @@ import { UsuarioModule } from './endpoint/usuario/usuario.module';
 @Module({
   imports: [TypeOrmModule.forRoot({
     "type": "mysql",
-    "host": "mysqldb",
+    "host": "monstasrv.mysql.database.azure.com",
     "port": 3306,
-    "username": "root",
-    "password": "urn0td3c3nt",
+    "username": "apps@monstasrv",
+    "password": "Urn0td3c3nt",
     "database": "duqdb",
     "synchronize": true,
     "logging": true,
     "entities": [
-      "dist/entities/*.entity.js"
+      __dirname + "/entities/*.entity.js"
     ]
   }), FichaModule, CompaniaModule, PesajeModule, TicketModule, UsuarioModule],
   controllers: [AppController],
