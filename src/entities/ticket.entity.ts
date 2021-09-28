@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, CreateDateColumn, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { PesajeEntity } from "./pesaje.entity";
 
 @Entity('ticket')
@@ -19,4 +19,14 @@ export class TicketEntity {
 
     @Column({ nullable: true })
     pesaje_id?: string;
+
+    @BeforeInsert()
+    genTicketNumber() {
+        let minm = 1;
+        let maxm = 999;
+        let tNumber = Math.floor(Math
+            .random() * (maxm - minm + 1)) + minm
+
+        this.numero = tNumber;
+    }
 }
