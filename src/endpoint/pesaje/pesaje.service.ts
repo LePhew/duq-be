@@ -53,5 +53,4 @@ export class PesajeService {
         await this._pesajeRepository.delete(id);
         return { deleted: true };
     }
-
 }

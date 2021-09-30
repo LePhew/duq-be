@@ -20,6 +20,9 @@ export class TicketEntity {
     @Column({ nullable: true })
     pesaje_id?: string;
 
+    @Column({ default: false })
+    cerrado: boolean;
+
     @BeforeInsert()
     genTicketNumber() {
         let minm = 1;
