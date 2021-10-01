@@ -9,7 +9,9 @@ export class TicketService {
     constructor(@InjectRepository(TicketEntity) private _ticketRepository: Repository<TicketEntity>) { }
 
     async getAll() {
-        return await this._ticketRepository.find();
+        return await this._ticketRepository.find({
+            where: { cerrado: false }
+        });
     }
 
     async getOne(id: string) {
@@ -30,5 +32,9 @@ export class TicketService {
     async delete(id: string) {
         await this._ticketRepository.delete(id);
         return { deleted: true };
+    }
+
+    async generarCierre(){
+        this._ticketRepository.query("UPDATE duqdb.ticket SET ticket.cerrado = 1 WHERE ticket.fecha_emision < DATE_SUB(current_timestamp(), INTERVAL 1 HOUR);")
     }
 }

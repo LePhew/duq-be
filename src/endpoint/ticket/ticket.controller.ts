@@ -30,4 +30,9 @@ export class TicketController {
         this._ticketService.update(id, data);
         return this._ticketService.getOne(id);
     }
+
+    @Post('cierre')
+    generarCierre() {
+        this._ticketService.generarCierre();
+    }
 }
