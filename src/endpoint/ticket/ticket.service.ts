@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TicketEntity } from '../../entities/ticket.entity';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 @Injectable()
 export class TicketService {
@@ -12,6 +12,24 @@ export class TicketService {
         return await this._ticketRepository.find({
             where: { cerrado: false }
         });
+    }
+    async getCerrados() {
+        return await this._ticketRepository.find({
+            where: { cerrado: true }
+        });
+    }
+
+    async getCerradosByDay() {
+        let cerradosByDay = await getRepository(TicketEntity)
+            .createQueryBuilder('tck')
+            .select("DAY(tck.fecha_emision)", "dias")
+            .addSelect("COUNT(tck.cerrado)", "cantidad")
+            .where("tck.cerrado = 1")
+            .groupBy("DAY(tck.fecha_emision)")
+            .getRawMany();
+
+        return cerradosByDay;
+
     }
 
     async getOne(id: string) {
@@ -34,7 +52,7 @@ export class TicketService {
         return { deleted: true };
     }
 
-    async generarCierre(){
+    async generarCierre() {
         this._ticketRepository.query("UPDATE duqdb.ticket SET ticket.cerrado = 1 WHERE ticket.fecha_emision < DATE_SUB(current_timestamp(), INTERVAL 1 HOUR);")
     }
 }

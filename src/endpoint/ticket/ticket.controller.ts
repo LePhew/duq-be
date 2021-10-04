@@ -15,6 +15,16 @@ export class TicketController {
         return this._ticketService.getAll();
     }
 
+    @Get('cerrados')
+    getCerrados() {
+        return this._ticketService.getCerrados();
+    }
+
+    @Get('cerrados/byday')
+    getCerradosByDay() {
+        return this._ticketService.getCerradosByDay();
+    }
+
     @Get(':id')
     getOne(@Param('id') id: string) {
         return this._ticketService.getOne(id);
