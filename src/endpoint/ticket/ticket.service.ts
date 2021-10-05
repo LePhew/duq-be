@@ -19,6 +19,7 @@ export class TicketService {
         });
     }
 
+    //TODO: I need to find a way to get values and labels as arrays on the front-end
     async getCerradosByDay() {
         let cerradosByDay = await getRepository(TicketEntity)
             .createQueryBuilder('tck')
@@ -31,7 +32,6 @@ export class TicketService {
         return cerradosByDay;
 
     }
-
     async getOne(id: string) {
         return await this._ticketRepository.findOne(id);
     }
