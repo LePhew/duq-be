@@ -29,7 +29,12 @@ export class TicketService {
             .groupBy("DAY(tck.fecha_emision)")
             .getRawMany();
 
-        return cerradosByDay;
+        let labels = cerradosByDay.map(c => c.dias);
+        let data = cerradosByDay.map(c => c.cantidad);
+        return {
+            labels,
+            data
+        };
 
     }
     async getOne(id: string) {
