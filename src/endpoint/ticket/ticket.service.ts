@@ -23,14 +23,31 @@ export class TicketService {
     async getCerradosByDay() {
         let cerradosByDay = await getRepository(TicketEntity)
             .createQueryBuilder('tck')
-            .select("DAY(tck.fecha_emision)", "dias")
+            .select("DATE_FORMAT(tck.fecha_emision, '%m-%d')", "dias")
             .addSelect("COUNT(tck.cerrado)", "cantidad")
             .where("tck.cerrado = 1")
-            .groupBy("DAY(tck.fecha_emision)")
+            .groupBy("DATE_FORMAT(tck.fecha_emision, '%m-%d')")
             .getRawMany();
 
         let labels = cerradosByDay.map(c => c.dias);
         let data = cerradosByDay.map(c => c.cantidad);
+        return {
+            labels,
+            data
+        };
+
+    }
+    async getCerradosByMonth() {
+        let cerradosByMonth = await getRepository(TicketEntity)
+            .createQueryBuilder('tck')
+            .select("DATE_FORMAT(tck.fecha_emision, '%M')", "mes")
+            .addSelect("COUNT(tck.cerrado)", "cantidad")
+            .where("tck.cerrado = 1")
+            .groupBy("DATE_FORMAT(tck.fecha_emision, '%M')")
+            .getRawMany();
+
+        let labels = cerradosByMonth.map(c => c.mes);
+        let data = cerradosByMonth.map(c => c.cantidad);
         return {
             labels,
             data

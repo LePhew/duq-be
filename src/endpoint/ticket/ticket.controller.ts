@@ -24,6 +24,10 @@ export class TicketController {
     getCerradosByDay() {
         return this._ticketService.getCerradosByDay();
     }
+    @Get('cerrados/bymonth')
+    getCerradosByMonth() {
+        return this._ticketService.getCerradosByMonth();
+    }
 
     @Get(':id')
     getOne(@Param('id') id: string) {
