@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { PesajeEntity } from '../../entities/pesaje.entity';
 import { TicketEntity } from '../../entities/ticket.entity';
 import { Pesaje } from '../../interfaces/pesaje';
-import { Repository } from 'typeorm';
+import { getRepository, Repository } from 'typeorm';
 
 @Injectable()
 export class PesajeService {
@@ -13,7 +13,13 @@ export class PesajeService {
         @InjectRepository(TicketEntity) private _ticketRepository: Repository<TicketEntity>) { }
 
     async getAll() {
-        return await this._pesajeRepository.find();
+        return await getRepository(PesajeEntity)
+            .createQueryBuilder('pesaje')
+            .innerJoinAndSelect('pesaje.ticket', 'ticket')
+            .innerJoinAndSelect('pesaje.ficha', 'ficha')
+            .innerJoinAndSelect('ficha.compania', 'compania')
+            .orderBy('ticket.fecha_emision', 'DESC')
+            .getMany();
     }
 
     async getOne(id: string) {
