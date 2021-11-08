@@ -28,7 +28,7 @@ export class TicketService {
       .createQueryBuilder('tck')
       .select("DATE_FORMAT(tck.fecha_emision, '%m-%d')", 'dias')
       .addSelect('COUNT(tck.cerrado)', 'cantidad')
-      .where('tck.cerrado = 1')
+      .where('tck.cerrado = 0')
       .groupBy("DATE_FORMAT(tck.fecha_emision, '%m-%d')")
       .getRawMany();
 
@@ -65,7 +65,7 @@ export class TicketService {
       .createQueryBuilder('tck')
       .select("DATE_FORMAT(tck.fecha_emision, '%M')", 'mes')
       .addSelect('COUNT(tck.cerrado)', 'cantidad')
-      .where('tck.cerrado = 1')
+      .where('tck.cerrado = 0')
       .groupBy("DATE_FORMAT(tck.fecha_emision, '%M')")
       .getRawMany();
 
@@ -98,7 +98,9 @@ export class TicketService {
 
   async generarCierre() {
     this._ticketRepository.query(
-      'UPDATE duqdb.ticket SET ticket.cerrado = 1 WHERE ticket.fecha_emision < DATE_SUB(current_timestamp(), INTERVAL 1 HOUR);',
+      `UPDATE duqdb.ticket SET ticket.cerrado = 1
+      WHERE ticket.cerrado = 0`
+      //'UPDATE duqdb.ticket SET ticket.cerrado = 1 WHERE ticket.fecha_emision < DATE_SUB(current_timestamp(), INTERVAL 1 HOUR);',
     );
   }
 }

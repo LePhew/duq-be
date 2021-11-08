@@ -20,6 +20,7 @@ export class PesajeService {
       .innerJoinAndSelect('pesaje.ticket', 'ticket')
       .innerJoinAndSelect('pesaje.ficha', 'ficha')
       .innerJoinAndSelect('ficha.compania', 'compania')
+      .where('ticket.cerrado = 0')
       .orderBy('ticket.fecha_emision', 'DESC')
       .getMany();
   }
