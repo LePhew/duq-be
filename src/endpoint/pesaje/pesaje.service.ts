@@ -25,6 +25,16 @@ export class PesajeService {
       .getMany();
   }
 
+  async getAllPesajes() {
+    return await getRepository(PesajeEntity)
+      .createQueryBuilder('pesaje')
+      .innerJoinAndSelect('pesaje.ticket', 'ticket')
+      .innerJoinAndSelect('pesaje.ficha', 'ficha')
+      .innerJoinAndSelect('ficha.compania', 'compania')
+      .orderBy('ticket.fecha_emision', 'DESC')
+      .getMany();
+  }
+
   async getOne(id: string) {
     return await this._pesajeRepository.findOne(id);
   }

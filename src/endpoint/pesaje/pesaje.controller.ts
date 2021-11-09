@@ -15,6 +15,11 @@ export class PesajeController {
         return this._pesajeService.getAll();
     }
 
+    @Get('all')
+    getAllPesajes(){
+        return this._pesajeService.getAllPesajes();
+    }
+
     @Get(':id')
     getOne(@Param('id') id: string) {
         return this._pesajeService.getOne(id);
