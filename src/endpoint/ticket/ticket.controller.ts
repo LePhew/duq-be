@@ -50,4 +50,9 @@ export class TicketController {
   generarCierre() {
     this._ticketService.generarCierre();
   }
+
+  @Post('delete/:id')
+  delete(@Param('id') id: string){
+    return this._ticketService.delete(id);
+  }
 }

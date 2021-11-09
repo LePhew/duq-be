@@ -13,7 +13,7 @@ export class TicketEntity {
     @CreateDateColumn()
     fecha_emision: Date;
 
-    @OneToOne(() => PesajeEntity, pesaje => pesaje.ticket)
+    @OneToOne(() => PesajeEntity, pesaje => pesaje.ticket, {onDelete: "CASCADE"})
     @JoinColumn({ name: "pesaje_id" })
     pesaje: PesajeEntity;
 

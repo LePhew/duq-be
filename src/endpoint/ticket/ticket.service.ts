@@ -66,11 +66,14 @@ export class TicketService {
       .select("DATE_FORMAT(tck.fecha_emision, '%M')", 'mes')
       .addSelect('COUNT(tck.cerrado)', 'cantidad')
       .where('tck.cerrado = 1')
+      .orderBy('mes', 'DESC')
       .groupBy("DATE_FORMAT(tck.fecha_emision, '%M')")
       .getRawMany();
 
     let labels = cerradosByMonth.map((c) => c.mes);
     let data = cerradosByMonth.map((c) => c.cantidad);
+    console.log(labels);
+    console.log(data);
     return {
       labels,
       data,

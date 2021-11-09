@@ -16,7 +16,7 @@ export class PesajeEntity {
     @Column()
     ficha_id: string;
 
-    @OneToOne(() => TicketEntity, ticket => ticket.pesaje, { eager: true })
+    @OneToOne(() => TicketEntity, ticket => ticket.pesaje, { eager: true, onDelete: "CASCADE" })
     @JoinColumn({ name: "ticket_id" })
     ticket: TicketEntity;
 

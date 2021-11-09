@@ -34,4 +34,9 @@ export class PesajeController {
     update(@Param('id') id: string, @Body() data: Partial<Pesaje>) {
         return this._pesajeService.update(id, data);
     }
+    
+    @Post('delete/:id')
+    delete(@Param('id') id: string){
+        return this._pesajeService.delete(id);
+    }
 }
