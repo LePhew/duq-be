@@ -28,7 +28,7 @@ export class TicketService {
       .createQueryBuilder('tck')
       .select("DATE_FORMAT(tck.fecha_emision, '%m-%d')", 'dias')
       .addSelect('COUNT(tck.cerrado)', 'cantidad')
-      .where('tck.cerrado = 0')
+      .where('tck.cerrado = 1')
       .groupBy("DATE_FORMAT(tck.fecha_emision, '%m-%d')")
       .getRawMany();
 
@@ -65,7 +65,7 @@ export class TicketService {
       .createQueryBuilder('tck')
       .select("DATE_FORMAT(tck.fecha_emision, '%M')", 'mes')
       .addSelect('COUNT(tck.cerrado)', 'cantidad')
-      .where('tck.cerrado = 0')
+      .where('tck.cerrado = 1')
       .groupBy("DATE_FORMAT(tck.fecha_emision, '%M')")
       .getRawMany();
 
